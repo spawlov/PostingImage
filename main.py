@@ -40,7 +40,13 @@ def download_image(url: str, api_key: str, path: str, filename: str) -> None:
     params = {
         "api_key": api_key,
     }
-    with requests.get(url=url, headers=HEADERS, params=params, stream=True, timeout=30) as response:
+    with requests.get(
+        url=url,
+        headers=HEADERS,
+        params=params,
+        stream=True,
+        timeout=30,
+    ) as response:
         response.raise_for_status()
 
         total_length = response.headers.get("Content-Length")
