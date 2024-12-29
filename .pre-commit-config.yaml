@@ -36,5 +36,5 @@ repos:
         entry: mypy .
         pass_filenames: false
         language: system
-        types: [python]
+        types: [ python ]
         require_serial: false
