@@ -51,7 +51,7 @@ def fetch_spacex_launch(file_params: dict[str, str], launch_id: str) -> None:
         )
 
 
-def fetch_spacex_all_launch(file_params: dict[str, str], limit: int | None = None):
+def fetch_spacex_all_launches(file_params: dict[str, str], limit: int | None = None):
     url = "https://api.spacexdata.com/v5/launches"
     with requests.get(url=url, headers=HEADERS, timeout=30) as response:
         response.raise_for_status()
@@ -73,12 +73,15 @@ def main():
         "path": os.getenv("SPACEX_PATH", "images"),
         "filename": os.getenv("SPACEX_FILENAME", "random"),
     }
+
     parser = create_parser()
     namespace = parser.parse_args()
-    if namespace.id_launch == "all":
-        fetch_spacex_all_launch(file_params, int(namespace.limit))
-    else:
-        fetch_spacex_launch(file_params, namespace.id_launch)
+
+    match namespace.id_launch:
+        case "all":
+            fetch_spacex_all_launches(file_params, int(namespace.limit))
+        case _:
+            fetch_spacex_launch(file_params, namespace.id_launch)
 
 
 if __name__ == "__main__":
