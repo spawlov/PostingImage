@@ -77,11 +77,20 @@ def main():
     parser = create_parser()
     namespace = parser.parse_args()
 
-    match namespace.id_launch:
-        case "all":
-            fetch_spacex_all_launches(file_params, int(namespace.limit))
-        case _:
-            fetch_spacex_launch(file_params, namespace.id_launch)
+    try:
+        match namespace.id_launch:
+            case "all":
+                fetch_spacex_all_launches(file_params, int(namespace.limit))
+            case _:
+                fetch_spacex_launch(file_params, namespace.id_launch)
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.ConnectTimeout,
+        requests.exceptions.HTTPError,
+        KeyError,
+        ValueError,
+    ) as error:
+        print(str(error))  # noqa
 
 
 if __name__ == "__main__":
