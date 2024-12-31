@@ -80,7 +80,7 @@ def main():
     try:
         match namespace.id_launch:
             case "all":
-                fetch_spacex_all_launches(file_params, namespace.limit)
+                fetch_spacex_all_launches(file_params, int(namespace.limit))
             case _:
                 fetch_spacex_launch(file_params, namespace.id_launch)
     except (
