@@ -27,7 +27,7 @@ def fetch_nasa_epic_images(api_key: str, file_params: dict[str, str]) -> None:
             epic_links.append(f"https://api.nasa.gov/EPIC/archive/natural/{date}/png/{filename}.png")
 
     for i, link in enumerate(epic_links):
-        filename = f"{file_params["filename"]}_{i}"
+        filename = f"{file_params['filename']}_{i}"
         if filename.startswith("random"):
             filename = get_md5_timestamp(8)
         download_image(

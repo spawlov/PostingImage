@@ -38,10 +38,10 @@ def fetch_spacex_launch(file_params: dict[str, str], launch_id: str) -> None:
         response.raise_for_status()
         spacex_links = response.json()["links"]["flickr"]["original"]
 
-    print(f"Скачивается {len(spacex_links)} фотографий пуска №{response.json()["flight_number"]}")  # noqa
+    print(f"Скачивается {len(spacex_links)} фотографий пуска №{response.json()['flight_number']}")  # noqa
 
     for i, link in enumerate(spacex_links):
-        filename = f"{file_params["filename"]}_{response.json()["flight_number"]}_{i}"
+        filename = f"{file_params['filename']}_{response.json()['flight_number']}_{i}"
         if filename.startswith("random"):
             filename = get_md5_timestamp(8)
         download_image(
