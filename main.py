@@ -12,7 +12,7 @@ def main() -> None:
 
     bot = telegram.Bot(tg_token)
     # bot.send_message(chat_id=chanel_id, text="Test message for chanel.")
-    bot.send_document(chat_id=chanel_id, document=open("images/spacex/spacex_13_0.jpg", "rb"))
+    bot.send_photo(chat_id=chanel_id, photo=open("images/spacex/spacex_13_0.jpg", "rb"))
 
 
 if __name__ == "__main__":
