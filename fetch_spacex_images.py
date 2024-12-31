@@ -18,10 +18,10 @@ HEADERS = {
 def create_parser() -> ArgumentParser:
     parser = argparse.ArgumentParser(description="Загрузка фотографий сделанных на пусках SPACEX")
     parser.add_argument(
-        "-id",
-        "--id_launch",
+        "-no",
+        "--launch_no",
         default="latest",
-        help="id пуска (all - загрузка фотографий со всех пусков, начиная с последнего)",
+        help="номер пуска (all - загрузка фотографий со всех пусков, начиная с последнего)",
     )
     parser.add_argument(
         "-l",
@@ -32,8 +32,22 @@ def create_parser() -> ArgumentParser:
     return parser
 
 
-def fetch_spacex_launch(file_params: dict[str, str], launch_id: str) -> None:
-    url = f"https://api.spacexdata.com/v5/launches/{launch_id}"
+def get_id_launch_at_number(launch_no: str) -> str | None:
+    if not launch_no.isdigit():
+        return launch_no
+
+    url = "https://api.spacexdata.com/v5/launches"
+    with requests.get(url=url, headers=HEADERS, timeout=30) as response:
+        response.raise_for_status()
+
+    for launch in response.json():
+        if int(launch_no) == launch["flight_number"]:
+            return launch["id"]
+    return None
+
+
+def fetch_spacex_launch(file_params: dict[str, str], launch_no: str) -> None:
+    url = f"https://api.spacexdata.com/v5/launches/{get_id_launch_at_number(launch_no)}"
     with requests.get(url=url, headers=HEADERS, timeout=30) as response:
         response.raise_for_status()
         spacex_links = response.json()["links"]["flickr"]["original"]
@@ -78,11 +92,11 @@ def main():
     namespace = parser.parse_args()
 
     try:
-        match namespace.id_launch:
+        match namespace.launch_no:
             case "all":
                 fetch_spacex_all_launches(file_params, int(namespace.limit))
             case _:
-                fetch_spacex_launch(file_params, namespace.id_launch)
+                fetch_spacex_launch(file_params, namespace.launch_no)
     except (
         requests.exceptions.ConnectionError,
         requests.exceptions.ConnectTimeout,
