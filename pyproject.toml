@@ -12,7 +12,7 @@ python-dotenv = "^1.0.1"
 tqdm = "^4.67.1"
 mypy = "^1.14.0"
 types-requests = "^2.32.0.20241016"
-python-telegram-bot = "13.0"
+python-telegram-bot = "13.15"
 
 
 [build-system]
@@ -20,7 +20,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
-python_version = 3.10
+python_version = "3.10"
 check_untyped_defs = true
 ignore_errors = false
 ignore_missing_imports = true
