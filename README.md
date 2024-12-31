@@ -35,15 +35,15 @@ git clone https://github.com/spawlov/PostingImage.git
 SPACEX_PATH=images/spacex - путь для сохранения картинок с запуска SPACE X
 SPACEX_FILENAME=spacex - имя файла фото, с номером через символ _ (random - для случайного имени)
 
-NASA_API_KEY=XKfdJ7GdJpDUuNhZIe06BLf0JU47QkoHQDcKmjWT - токен NASA
+NASA_API_KEY= <токен NASA>
 NASA_APOD_PATH=images/nasa_apod - путь для сохранения фото космоса
 NASA_APOD_FILENAME=apod - имя файла фото, с номером через символ _ (random - для случайного имени)
 NASA_APOD_COUNT=50 - количество фото космоса загружаемых за один прием
 NASA_EPIC_PATH=images/nasa_epic - путь для сохранения фото Земли из космоса
 NASA_EPIC_FILENAME=epic - имя файла фото, с номером через символ _ (random - для случайного имени)
 
-TG_BOT_TOKEN=7284497691:AAFuS5XyK7xgTKgVKhcuNrVtfVeW3HI-G6Q - токен телеграм бота
-TG_CHANEL_ID=@diffspaceimages - id телеграм канала для публикации фото
+TG_BOT_TOKEN= <токен телеграм бота>
+TG_CHANEL_ID=@some_tg_channel - id телеграм канала для публикации фото
 TG_POSTING_PERIOD=14400 - периодичность публикации в секундах
 ```
 <hr>
