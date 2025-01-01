@@ -19,10 +19,16 @@ def create_parser() -> ArgumentParser:
         help="путь к файлу или url с фотографией для публикации",
     )
     parser.add_argument(
+        "-cycle",
+        "--cycle",
+        default="no",
+        help="публиковать фотографии из папки images с бесконечном цикле yes/no",
+    )
+    parser.add_argument(
         "-period",
         "--posting_period",
         default=None,
-        help="периодичность публикации случайно выбранной фотографии",
+        help="периодичность публикации случайно выбранной фотографии - применяется с cycle",
     )
     return parser
 
@@ -50,18 +56,21 @@ def main() -> None:
         bot.send_photo(chat_id=chanel_id, photo=open(namespace.photo_path, "rb"))
         return
 
-    if namespace.posting_period:
-        posting_period = namespace.posting_period
-
     images = []
     for root, _, files in os.walk("images"):
         for name in files:
             images.append(f"{root}/{name}")
 
-    while True:
-        image_no = randint(0, len(images))
-        bot.send_photo(chat_id=chanel_id, photo=open(images[image_no], "rb"))
-        sleep(int(posting_period))
+    if namespace.cycle.lower() == "yes":
+        if namespace.posting_period:
+            posting_period = namespace.posting_period
+
+        while True:
+            image_no = randint(0, len(images))
+            bot.send_photo(chat_id=chanel_id, photo=open(images[image_no], "rb"))
+            sleep(int(posting_period))
+
+    bot.send_photo(chat_id=chanel_id, photo=open(images[randint(0, len(images))], "rb"))
 
 
 if __name__ == "__main__":
