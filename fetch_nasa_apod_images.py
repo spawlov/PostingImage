@@ -1,4 +1,6 @@
+import argparse
 import os
+from argparse import ArgumentParser
 from typing import Any
 
 from dotenv import find_dotenv, load_dotenv
@@ -12,6 +14,17 @@ HEADERS = {
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/39.0.2171.95 Safari/537.36",
 }
+
+
+def create_parser() -> ArgumentParser:
+    parser = argparse.ArgumentParser(description="Загрузка фото дня от NASA")
+    parser.add_argument(
+        "-l",
+        "--limit",
+        default=None,
+        help="лимит загружаемых фотографий",
+    )
+    return parser
 
 
 def fetch_nasa_apod_images(api_key: str, file_params: dict[str, str], count: int) -> None:
@@ -44,6 +57,12 @@ def main():
         "filename": os.getenv("NASA_APOD_FILENAME", "random"),
     }
     count = int(os.getenv("NASA_APOD_COUNT", 50))
+
+    parser = create_parser()
+    namespace = parser.parse_args()
+    if namespace.limit:
+        count = int(namespace.limit)
+
     try:
         fetch_nasa_apod_images(api_key, file_params, count)
     except (
