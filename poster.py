@@ -19,7 +19,10 @@ def create_parser() -> ArgumentParser:
         help="путь к файлу или url с фотографией для публикации",
     )
     parser.add_argument(
-        "-period", "--posting_period", default=None, help="периодичность публикации случайно выбранной фотографии"
+        "-period",
+        "--posting_period",
+        default=None,
+        help="периодичность публикации случайно выбранной фотографии",
     )
     return parser
 
