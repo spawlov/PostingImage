@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  linters:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
@@ -31,7 +31,7 @@ jobs:
       run: flake8 --max-line-length=120
 
     - name: Run black
-      run: black --check .
+      run: black --line-length=120 --check .
 
     - name: Run mypy
       run: mypy .
