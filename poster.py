@@ -29,7 +29,7 @@ def create_parser() -> ArgumentParser:
 
 def is_url(path):
     parsed = urlparse(path)
-    return parsed.scheme in ("http", "https", "ftp", "ftps", "mailto")
+    return parsed.scheme in ("http", "https", "ftp", "ftps")
 
 
 def main() -> None:
