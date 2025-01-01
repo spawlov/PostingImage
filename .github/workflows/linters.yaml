@@ -1,4 +1,4 @@
-name: ScienceNews Lint
+name: Linters
 
 on:
   push:
