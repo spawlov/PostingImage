@@ -17,8 +17,7 @@ HEADERS = {
 
 def make_dir(path: str) -> str:
     path = os.path.normpath(f"{os.getcwd()}/{path.strip()}")
-    if not os.path.exists(path):
-        os.makedirs(path)
+    os.makedirs(path, exist_ok=True)
     return path
 
 
