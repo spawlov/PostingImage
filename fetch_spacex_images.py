@@ -1,6 +1,7 @@
 import argparse
 import os
 from argparse import ArgumentParser
+from typing import Union
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -32,7 +33,7 @@ def create_parser() -> ArgumentParser:
     return parser
 
 
-def get_id_launch_at_number(launch_no: str) -> str | None:
+def get_id_launch_at_number(launch_no: str) -> Union[str, None]:
     if not launch_no.isdigit():
         return launch_no
 
@@ -65,7 +66,7 @@ def fetch_spacex_launch(file_params: dict[str, str], launch_no: str) -> None:
         )
 
 
-def fetch_spacex_all_launches(file_params: dict[str, str], limit: int | None = None):
+def fetch_spacex_all_launches(file_params: dict[str, str], limit: Union[int, None] = None):
     url = "https://api.spacexdata.com/v5/launches"
     with requests.get(url=url, headers=HEADERS, timeout=30) as response:
         response.raise_for_status()
