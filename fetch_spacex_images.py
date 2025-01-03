@@ -92,11 +92,10 @@ def main():
     namespace = parser.parse_args()
 
     try:
-        match namespace.launch_no:
-            case "all":
-                fetch_spacex_all_launches(file_params, int(namespace.limit))
-            case _:
-                fetch_spacex_launch(file_params, namespace.launch_no)
+        if namespace.launch_no == "all":
+            fetch_spacex_all_launches(file_params, int(namespace.limit))
+        else:
+            fetch_spacex_launch(file_params, namespace.launch_no)
     except (
         requests.exceptions.ConnectionError,
         requests.exceptions.ConnectTimeout,
