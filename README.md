@@ -10,15 +10,38 @@
 ```sh
 python --version
 ```
+**Версия Python должна быть не ниже 3.8 и не выше 3.10** 
+
 Возможно, вместо команды `python` здесь и в остальных инструкциях этого README придётся использовать `python3`. 
 
 - Склонируйте репозиторий:
-
 ```shell
 git clone https://github.com/spawlov/PostingImage.git
 ```
 
-- Виртуальное окружение создается [Poetry](https://github.com/python-poetry/poetry)
+#### Если вы используете Poetry
+
+Для установки и активации виртуального окружения запустите последовательно команды:
+```shell
+poetry install
+poetry shell
+```
+
+#### Если вы используете pyhon venv
+
+В каталоге проекта создайте виртуальное окружение:
+```sh
+python -m venv venv
+```
+Активируйте его. На разных операционных системах это делается разными командами:
+
+- Windows: `.\venv\Scripts\activate`
+- MacOS/Linux: `source venv/bin/activate`
+
+Установите зависимости в виртуальное окружение:
+```shell
+pip install -r requirements.txt
+```
 
 Создайте бот в телеграм и получите токен, для этого 
 - Напишите боту [@BotFather](https://t.me/BotFather) команду ```/newbot```
