@@ -37,8 +37,8 @@ def fetch_nasa_apod_images(api_key: str, file_params: Dict[str, str], count: int
     response.raise_for_status()
     nasa_links = [item["hdurl"].strip() for item in response.json()]
 
-    for i, link in enumerate(nasa_links):
-        filename = f"{file_params['filename']}_{i}"
+    for index, link in enumerate(nasa_links):
+        filename = f"{file_params['filename']}_{index}"
         if filename.startswith("random"):
             filename = get_md5_timestamp(8)
         download_image(
