@@ -53,8 +53,9 @@ def main() -> None:
         if is_url(namespace.photo_path):
             bot.send_photo(chat_id=chanel_id, photo=namespace.photo_path)
             return
-        bot.send_photo(chat_id=chanel_id, photo=open(namespace.photo_path, "rb"))
-        return
+        with open(namespace.photo_path, "rb") as photo:
+            bot.send_photo(chat_id=chanel_id, photo=photo)
+            return
 
     images = []
     for root, _, files in os.walk("images"):
@@ -67,10 +68,12 @@ def main() -> None:
 
         while True:
             image_no = randint(0, len(images))
-            bot.send_photo(chat_id=chanel_id, photo=open(images[image_no], "rb"))
+            with open(images[image_no], "rb") as photo:
+                bot.send_photo(chat_id=chanel_id, photo=photo)
             sleep(int(posting_period))
 
-    bot.send_photo(chat_id=chanel_id, photo=open(images[randint(0, len(images))], "rb"))
+    with open(images[randint(0, len(images))], "rb") as photo:
+        bot.send_photo(chat_id=chanel_id, photo=photo)
 
 
 if __name__ == "__main__":
