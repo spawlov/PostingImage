@@ -62,17 +62,7 @@ def main():
     namespace = parser.parse_args()
     if namespace.limit:
         count = int(namespace.limit)
-
-    try:
-        fetch_nasa_apod_images(api_key, file_params, count)
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.ConnectTimeout,
-        requests.exceptions.HTTPError,
-        KeyError,
-        ValueError,
-    ) as error:
-        print(str(error))  # noqa
+    fetch_nasa_apod_images(api_key, file_params, count)
 
 
 if __name__ == "__main__":

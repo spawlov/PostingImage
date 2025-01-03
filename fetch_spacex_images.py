@@ -92,19 +92,10 @@ def main():
     parser = create_parser()
     namespace = parser.parse_args()
 
-    try:
-        if namespace.launch_no == "all":
-            fetch_spacex_all_launches(file_params, int(namespace.limit))
-        else:
-            fetch_spacex_launch(file_params, namespace.launch_no)
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.ConnectTimeout,
-        requests.exceptions.HTTPError,
-        KeyError,
-        ValueError,
-    ) as error:
-        print(str(error))  # noqa
+    if namespace.launch_no == "all":
+        fetch_spacex_all_launches(file_params, int(namespace.limit))
+    else:
+        fetch_spacex_launch(file_params, namespace.launch_no)
 
 
 if __name__ == "__main__":

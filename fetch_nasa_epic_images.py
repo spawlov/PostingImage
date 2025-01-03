@@ -46,16 +46,7 @@ def main():
         "path": os.getenv("NASA_EPIC_PATH", "images"),
         "filename": os.getenv("NASA_EPIC_FILENAME", "random"),
     }
-    try:
-        fetch_nasa_epic_images(api_key, file_params)
-    except (
-        requests.exceptions.ConnectionError,
-        requests.exceptions.ConnectTimeout,
-        requests.exceptions.HTTPError,
-        KeyError,
-        ValueError,
-    ) as error:
-        print(str(error))  # noqa
+    fetch_nasa_epic_images(api_key, file_params)
 
 
 if __name__ == "__main__":
