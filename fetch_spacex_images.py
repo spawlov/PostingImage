@@ -38,8 +38,8 @@ def get_id_launch_at_number(launch_no: str) -> Union[str, None]:
         return launch_no
 
     url = "https://api.spacexdata.com/v5/launches"
-    with requests.get(url=url, headers=HEADERS, timeout=30) as response:
-        response.raise_for_status()
+    response = requests.get(url=url, headers=HEADERS, timeout=30)
+    response.raise_for_status()
 
     for launch in response.json():
         if int(launch_no) == launch["flight_number"]:
@@ -49,9 +49,9 @@ def get_id_launch_at_number(launch_no: str) -> Union[str, None]:
 
 def fetch_spacex_launch(file_params: Dict[str, str], launch_no: str) -> None:
     url = f"https://api.spacexdata.com/v5/launches/{get_id_launch_at_number(launch_no)}"
-    with requests.get(url=url, headers=HEADERS, timeout=30) as response:
-        response.raise_for_status()
-        spacex_links = response.json()["links"]["flickr"]["original"]
+    response = requests.get(url=url, headers=HEADERS, timeout=30)
+    response.raise_for_status()
+    spacex_links = response.json()["links"]["flickr"]["original"]
 
     print(f"Скачивается {len(spacex_links)} фотографий пуска №{response.json()['flight_number']}")  # noqa
 
@@ -68,8 +68,8 @@ def fetch_spacex_launch(file_params: Dict[str, str], launch_no: str) -> None:
 
 def fetch_spacex_all_launches(file_params: Dict[str, str], limit: Union[int, None] = None):
     url = "https://api.spacexdata.com/v5/launches"
-    with requests.get(url=url, headers=HEADERS, timeout=30) as response:
-        response.raise_for_status()
+    response = requests.get(url=url, headers=HEADERS, timeout=30)
+    response.raise_for_status()
 
     launch_ids = []
     count_photos = 0

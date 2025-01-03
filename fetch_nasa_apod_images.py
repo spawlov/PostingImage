@@ -33,9 +33,9 @@ def fetch_nasa_apod_images(api_key: str, file_params: Dict[str, str], count: int
         "count": count,
         "api_key": api_key,
     }
-    with requests.get(url=url, headers=HEADERS, params=params, timeout=30) as response:
-        response.raise_for_status()
-        nasa_links = [item["hdurl"].strip() for item in response.json()]
+    response = requests.get(url=url, headers=HEADERS, params=params, timeout=30)
+    response.raise_for_status()
+    nasa_links = [item["hdurl"].strip() for item in response.json()]
 
     for i, link in enumerate(nasa_links):
         filename = f"{file_params['filename']}_{i}"

@@ -20,12 +20,12 @@ def fetch_nasa_epic_images(api_key: str, file_params: Dict[str, str]) -> None:
         "api_key": api_key,
     }
     epic_links = []
-    with requests.get(url=url, headers=HEADERS, params=params, timeout=30) as response:
-        response.raise_for_status()
-        for item in response.json():
-            date = item["date"].split()[0].replace("-", "/")
-            filename = item["image"]
-            epic_links.append(f"https://api.nasa.gov/EPIC/archive/natural/{date}/png/{filename}.png")
+    response = requests.get(url=url, headers=HEADERS, params=params, timeout=30)
+    response.raise_for_status()
+    for item in response.json():
+        date = item["date"].split()[0].replace("-", "/")
+        filename = item["image"]
+        epic_links.append(f"https://api.nasa.gov/EPIC/archive/natural/{date}/png/{filename}.png")
 
     for i, link in enumerate(epic_links):
         filename = f"{file_params['filename']}_{i}"

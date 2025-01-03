@@ -40,28 +40,22 @@ def download_image(url: str, path: str, filename: str, api_key: Union[str, None]
         params = {
             "api_key": api_key,
         }
-    with requests.get(
-        url=url,
-        headers=HEADERS,
-        params=params,
-        stream=True,
-        timeout=30,
-    ) as response:
-        response.raise_for_status()
+    response = requests.get(url=url, headers=HEADERS, params=params, stream=True, timeout=30)
+    response.raise_for_status()
 
-        total_length = response.headers.get("Content-Length")
-        if not total_length:
-            raise ValueError("Content-Length is None")
+    total_length = response.headers.get("Content-Length")
+    if not total_length:
+        raise ValueError("Content-Length is None")
 
-        filename = f"{make_dir(path)}/{filename}"
-        with open(filename, "wb") as file:
-            with tqdm(
-                total=int(total_length),
-                unit="B",
-                unit_scale=True,
-                colour="green",
-                desc=filename,
-            ) as progress_bar:
-                for chunk in response.iter_content(chunk_size=1024):
-                    file.write(chunk)
-                    progress_bar.update(len(chunk))
+    filename = f"{make_dir(path)}/{filename}"
+    with open(filename, "wb") as file:
+        with tqdm(
+            total=int(total_length),
+            unit="B",
+            unit_scale=True,
+            colour="green",
+            desc=filename,
+        ) as progress_bar:
+            for chunk in response.iter_content(chunk_size=1024):
+                file.write(chunk)
+                progress_bar.update(len(chunk))
