@@ -21,7 +21,7 @@ def create_parser() -> ArgumentParser:
     parser.add_argument(
         "-cycle",
         "--cycle",
-        default="no",
+        action="store_true",
         help="публиковать фотографии из папки images с бесконечном цикле yes/no",
     )
     parser.add_argument(
@@ -62,7 +62,7 @@ def main() -> None:
         for name in files:
             images.append(f"{root}/{name}")
 
-    if namespace.cycle.lower() == "yes":
+    if namespace.cycle:
         if namespace.posting_period:
             posting_period = namespace.posting_period
 

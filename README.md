@@ -129,6 +129,10 @@ python fetch_nasa_epic_images.py
 
 ### Публикация фотографий в канале телеграм
 
+- публикация одной случайной, ранее загруженной, фотографии:
+```
+python post_photos.py
+```
 - публикация определенной ранее скачанной фотографии или внешней фотографии:
 ```
 python post_photos.py -photo=<относительный путь к файлу или url>
@@ -137,21 +141,13 @@ python post_photos.py -photo=<относительный путь к файлу 
 ```
 python post_photos.py --photo_path=<относительный путь к файлу или url>
 ```
-- публикация одной случайной, ранее загруженной, фотографии:
-```
-python post_photos.py -cycle=no
-```
-или
-```
-python post_photos.py --cycle=no
-```
 - публикация случайной, ранее загруженной, фотографии в бесконечном цикле:
 ```
-python post_photos.py -cycle=yes [-period=<периодичность в секуднах>]
+python post_photos.py -cycle [-period=<периодичность в секуднах>]
 ```
 или
 ```
-python post_photos.py --cycle=yes [--posting_period=<периодичность в секуднах>]
+python post_photos.py --cycle [--posting_period=<периодичность в секуднах>]
 ```
 ***Периодичность задается в секундах, если опущен этот параметр - настройка из файла .env***
 <hr>
