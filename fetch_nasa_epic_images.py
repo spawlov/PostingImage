@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -13,7 +14,7 @@ HEADERS = {
 }
 
 
-def fetch_nasa_epic_images(api_key: str, file_params: dict[str, str]) -> None:
+def fetch_nasa_epic_images(api_key: str, file_params: Dict[str, str]) -> None:
     url = "https://api.nasa.gov/EPIC/api/natural"
     params = {
         "api_key": api_key,

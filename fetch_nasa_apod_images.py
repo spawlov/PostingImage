@@ -1,7 +1,7 @@
 import argparse
 import os
 from argparse import ArgumentParser
-from typing import Any
+from typing import Any, Dict
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -27,9 +27,9 @@ def create_parser() -> ArgumentParser:
     return parser
 
 
-def fetch_nasa_apod_images(api_key: str, file_params: dict[str, str], count: int) -> None:
+def fetch_nasa_apod_images(api_key: str, file_params: Dict[str, str], count: int) -> None:
     url = "https://api.nasa.gov/planetary/apod"
-    params: dict[str, Any] = {
+    params: Dict[str, Any] = {
         "count": count,
         "api_key": api_key,
     }

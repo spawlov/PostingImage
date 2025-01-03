@@ -1,6 +1,7 @@
 import hashlib
 import os
 from time import time
+from typing import Union
 from urllib.parse import urlparse
 
 import requests
@@ -33,7 +34,7 @@ def get_file_extension(url: str) -> str:
     return extension.lower()
 
 
-def download_image(url: str, path: str, filename: str, api_key: str | None = None) -> None:
+def download_image(url: str, path: str, filename: str, api_key: Union[str, None] = None) -> None:
     params = None
     if api_key:
         params = {
