@@ -72,11 +72,9 @@ def fetch_spacex_all_launches(file_params: Dict[str, str], limit: Union[int, Non
     response.raise_for_status()
 
     launch_ids = []
-    count_photos = 0
     for launch in reversed(response.json()):
         if launch["links"]["flickr"]["original"]:
             launch_ids.append(launch["id"])
-            count_photos += len(launch["links"]["flickr"]["original"])
 
     for launch_id in launch_ids[:limit]:
         fetch_spacex_launch(file_params, launch_id)
